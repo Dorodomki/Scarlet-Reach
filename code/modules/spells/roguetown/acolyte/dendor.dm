@@ -83,10 +83,20 @@
 
 /obj/effect/proc_holder/spell/targeted/conjure_glowshroom/cast(list/targets, mob/user = usr)
 	. = ..()
-	var/turf/TT = get_turf(usr)
-	if(!isclosedturf(TT) && !locate(/obj/structure/glowshroom) in TT && !locate(/obj/structure/glowshroom/dendorite) in TT)
-		new /obj/structure/glowshroom/dendorite(TT)
+	var/turf/target_turf = get_step(user, user.dir)
+	var/turf/target_turf_two = get_step(target_turf, turn(user.dir, 90))
+	var/turf/target_turf_three = get_step(target_turf, turn(user.dir, -90))
+
+	if(!locate(/obj/structure/glowshroom) in target_turf)
+		new /obj/structure/glowshroom/dendorite(target_turf)
+
+	if(!locate(/obj/structure/glowshroom in target_turf_two))
+		new /obj/structure/glowshroom/dendorite(target_turf_two)
+
+	if(!locate(/obj/structure/glowshroom) in target_turf_three)
+		new /obj/structure/glowshroom/dendorite(target_turf_three)
 	return TRUE
+
 
 /obj/effect/proc_holder/spell/targeted/conjure_vines
 	name = "Vine Sprout"
