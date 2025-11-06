@@ -4,7 +4,7 @@
 	footstep_type = FOOTSTEP_MOB_CLAW
 	ambushable = FALSE
 	skin_armor = new /obj/item/clothing/suit/roguetown/armor/skin_armor/bear_skin
-	// Slow, tanky melee form that is purely focused on melee and nothing else
+	// Slow, tanky melee form that is purely focused on melee and some swimming
 
 //BUCKLING
 /mob/living/carbon/human/species/wildshape/bear/buckle_mob(mob/living/target, force = TRUE, check_loc = TRUE, lying_buckle = FALSE, hands_needed = 0, target_hands_needed = 0)
