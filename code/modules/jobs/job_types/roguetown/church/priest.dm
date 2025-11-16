@@ -202,7 +202,6 @@ GLOBAL_LIST_EMPTY(heretical_players)
 		new_devotion.passive_progression_gain = CLERIC_REGEN_MAJOR
 		new_devotion.devotion = 50
 		new_devotion.progression = 50
-		START_PROCESSING(SSobj, new_devotion)
 		// Populate granted_spells without adding to mind.spell_list
 		if(length(god.miracles))
 			for(var/spell_type in god.miracles)
@@ -212,6 +211,7 @@ GLOBAL_LIST_EMPTY(heretical_players)
 		mind.stored_miracle_sets[string_choice] = new_devotion
 
 	devotion = mind.stored_miracle_sets[string_choice]
+	START_PROCESSING(SSobj, devotion)
 
 	var/static/list/always_keep_spells = list(
 		/obj/effect/proc_holder/spell/self/convertrole/templar,
