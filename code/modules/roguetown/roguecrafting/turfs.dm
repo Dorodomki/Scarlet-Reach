@@ -439,6 +439,33 @@
 		return
 	return TRUE
 
+/datum/crafting_recipe/roguetown/roguewindow/harem1
+	name = "harem window"
+	result = /obj/structure/roguewindow/harem1
+	reqs = list(/obj/item/natural/stone = 2, /obj/item/natural/glass = 1)
+	skillcraft = /datum/skill/craft/masonry
+	verbage_simple = "build"
+	verbage = "builds"
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/roguewindow/harem2
+	name = "ornamental harem window"
+	result = /obj/structure/roguewindow/harem2
+	reqs = list(/obj/item/natural/stone = 2, /obj/item/natural/glass = 1, /obj/item/alch/rosa = 1)
+	skillcraft = /datum/skill/craft/masonry
+	verbage_simple = "build"
+	verbage = "builds"
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/roguewindow/harem3
+	name = "reinforced harem window"
+	result = /obj/structure/roguewindow/harem3
+	reqs = list(/obj/item/natural/stone = 2, /obj/item/natural/glass =2)
+	skillcraft = /datum/skill/craft/masonry
+	verbage_simple = "build"
+	verbage = "builds"
+	craftdiff = 4
+
 // The windows you can open and close
 /datum/crafting_recipe/roguetown/turfs/roguewindow/dynamic
 	name = "openable glass window"
