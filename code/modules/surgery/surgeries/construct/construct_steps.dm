@@ -1,0 +1,109 @@
+/// CONSTRUCT VERSIONS OF SURGERIES
+
+/// Incision
+/datum/surgery_step/incise/construct
+    name = "Uncover"
+    surgery_flags = SURGERY_CONSTRUCT
+    surgery_flags_blocked = SURGERY_INCISED
+    skill_used = /datum/skill/craft/engineering
+
+/datum/surgery_step/incise/construct/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	display_results(user, target, span_notice("I begin to make an opening in [target]'s [parse_zone(target_zone)]..."),
+		span_notice("[user] begins to make an opening in [target]'s [parse_zone(target_zone)]."),
+		span_notice("[user] begins to make an opening in [target]'s [parse_zone(target_zone)]."))
+	return TRUE
+
+/datum/surgery_step/incise/construct/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	display_results(user, target, span_notice("[target]'s [parse_zone(target_zone)] opens up, exposing another layer."),
+		span_notice("[target]'s [parse_zone(target_zone)] opens up, exposing an inner-layer."))
+	var/obj/item/bodypart/gotten_part = target.get_bodypart(check_zone(target_zone))
+	if(gotten_part)
+		gotten_part.add_wound(/datum/wound/slash/incision/construct)
+	return TRUE
+
+/// Clamping
+/datum/surgery_step/clamp/construct
+    name = "Secure cogs"
+    surgery_flags = SURGERY_CONSTRUCT
+    surgery_flags_blocked = SURGERY_CLAMPED
+    skill_used = /datum/skill/craft/engineering
+
+/datum/surgery_step/clamp/construct/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	display_results(user, target, span_notice("I begin to secure cogs in [target]'s [parse_zone(target_zone)]..."),
+		span_notice("[user] begins to secure cogs in [target]'s [parse_zone(target_zone)]."),
+		span_notice("[user] begins to secure cogs in [target]'s [parse_zone(target_zone)]."))
+	return TRUE
+
+/datum/surgery_step/clamp/construct/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	display_results(user, target, span_notice("I secure the cogs in [target]'s [parse_zone(target_zone)]."),
+		span_notice("[user] secure the cogs in [target]'s [parse_zone(target_zone)]."),
+		span_notice("[user] secure the cogs in [target]'s [parse_zone(target_zone)]."))
+	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
+	bodypart?.add_embedded_object(tool, crit_message = FALSE)
+	return TRUE
+
+/// Retracting
+/datum/surgery_step/retract/construct
+    name = "Open inner-hatch"
+    surgery_flags = SURGERY_CONSTRUCT
+    surgery_flags_blocked = SURGERY_RETRACTED
+    skill_used = /datum/skill/craft/engineering
+
+/datum/surgery_step/retract/construct/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	return ..()
+
+/datum/surgery_step/retract/construct/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	return ..()
+
+/// Cauterizing -- Nothing, cautery doesn't affect them.
+
+/// Saw bone
+/datum/surgery_step/saw/construct
+    name = "Saw support structure"
+    surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_CONSTRUCT
+    surgery_flags_blocked = SURGERY_BROKEN
+    skill_used = /datum/skill/craft/engineering
+
+/datum/surgery_step/saw/construct/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	display_results(user, target, span_notice("I begin to saw through the support structure in [target]'s [parse_zone(target_zone)]..."),
+		span_notice("[user] begins to saw through the support structure in [target]'s [parse_zone(target_zone)]."),
+		span_notice("[user] begins to saw through the support structure in [target]'s [parse_zone(target_zone)]."))
+	return TRUE
+
+/datum/surgery_step/saw/construct/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	display_results(user, target, span_notice("I saw [target]'s [parse_zone(target_zone)] open."),
+		span_notice("[user] saws [target]'s [parse_zone(target_zone)] open!"),
+		span_notice("[user] saws [target]'s [parse_zone(target_zone)] open!"))
+	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
+	if(bodypart)
+		var/fracture_type = /datum/wound/fracture
+		//yes we ignore crit resist here because this is a proper surgical procedure, not a crit
+		switch(bodypart.body_zone)
+			if(BODY_ZONE_HEAD)
+				fracture_type = /datum/wound/fracture/head
+			if(BODY_ZONE_PRECISE_NECK)
+				fracture_type = /datum/wound/fracture/neck
+			if(BODY_ZONE_CHEST)
+				fracture_type = /datum/wound/fracture/chest
+			if(BODY_ZONE_PRECISE_GROIN)
+				fracture_type = /datum/wound/fracture/groin
+		bodypart.add_wound(fracture_type)
+	return TRUE
+
+/// Drill bone
+/datum/surgery_step/drill/construct
+    name = "Drill inner-structure"
+    surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_CONSTRUCT
+    surgery_flags_blocked = SURGERY_BROKEN
+    skill_used = /datum/skill/craft/engineering
+
+/datum/surgery_step/drill/construct/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+	return ..()
+
+/datum/surgery_step/drill/construct/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+	display_results(user, target, span_notice("I drill into [target]'s [parse_zone(target_zone)]."),
+		span_notice("[user] drills into [target]'s [parse_zone(target_zone)]!"),
+		span_notice("[user] drills into [target]'s [parse_zone(target_zone)]!"))
+	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
+	bodypart?.add_wound(/datum/wound/puncture/drilling)
+	return TRUE
