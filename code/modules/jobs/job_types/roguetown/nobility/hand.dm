@@ -57,6 +57,7 @@
 		var/mob/living/carbon/human/H = L
 		if(istype(H))
 			H.verbs |= list(/mob/living/carbon/human/proc/disgrace_knight, /mob/living/carbon/human/proc/fire_guard)
+			H.hand_disgrace_cooldown = 0
 	addtimer(CALLBACK(src, PROC_REF(know_agents), L), 5 SECONDS)
 
 /datum/job/roguetown/hand/proc/know_agents(var/mob/living/carbon/human/H)
@@ -68,6 +69,10 @@
 			to_chat(H, span_notice(name))
 
 // Disgrace Knight verb - available to Duke and Hand
+/mob/living/carbon/human
+	var/hand_disgrace_cooldown = 0
+	var/hand_fire_guard_cooldown = 0
+
 /mob/living/carbon/human/proc/disgrace_knight()
 	set name = "Disgrace Knight"
 	set category = "Nobility"
@@ -75,9 +80,9 @@
 	if(stat)
 		return
 
-	static/disgrace_cooldown = 0
-	if(disgrace_cooldown > world.time)
-		to_chat(src, span_warning("I need to wait before disgracing another knight again."))
+	// Check cooldown and show remaining time BEFORE input
+	if(hand_disgrace_cooldown > world.time)
+		to_chat(src, span_warning("I need to wait [DisplayTimeText(hand_disgrace_cooldown - world.time)] before disgracing another knight."))
 		return FALSE
 
 	// Must be in the throne room
@@ -107,7 +112,7 @@
 		to_chat(src, span_warning("[target.real_name] is not a knight."))
 		return FALSE
 
-	disgrace_cooldown = world.time + DISGRACE_KNIGHT_COOLDOWN
+	hand_disgrace_cooldown = world.time + DISGRACE_KNIGHT_COOLDOWN
 
 	// If already disgraced, restore their honor
 	if(HAS_TRAIT(target, TRAIT_DISGRACED_KNIGHT))
@@ -141,9 +146,9 @@
 	if(stat)
 		return
 
-	static/fire_cooldown = 0
-	if(fire_cooldown > world.time)
-		to_chat(src, span_warning("I need to wait before firing another guard again."))
+	// Check cooldown and show remaining time BEFORE input
+	if(hand_fire_guard_cooldown > world.time)
+		to_chat(src, span_warning("I need to wait [DisplayTimeText(hand_fire_guard_cooldown - world.time)] before firing another guard."))
 		return FALSE
 
 	var/inputty = input("Fire a guard from service. They cannot be re-hired. Enter their name:", "Fire Guard") as text|null
@@ -172,7 +177,7 @@
 		to_chat(src, span_warning("[target.real_name] is not currently serving as a guard."))
 		return FALSE
 
-	fire_cooldown = world.time + FIRE_GUARD_COOLDOWN
+	hand_fire_guard_cooldown = world.time + FIRE_GUARD_COOLDOWN
 
 	// Fire them - remove guard trait and change job to Towner
 	REMOVE_TRAIT(target, TRAIT_GUARDSMAN, JOB_TRAIT)
@@ -289,7 +294,7 @@
 
 /datum/advclass/hand/advisor
 	name = "Advisor"
-	tutorial = "You serve as both scholar and advisor to the Noble-Family, wielding knowledge and magicks with potent ability. Let no man forget whose ear you whisper into, your sage advice has saved more lives than any strategist’s orders or spymaster’s schemes could ever claim to."
+	tutorial = "You serve as both scholar and advisor to the Noble-Family, wielding knowledge and magicks with potent ability. Let no man forget whose ear you whisper into, your sage advice has saved more lives than any strategist's orders or spymaster's schemes could ever claim to."
 	outfit = /datum/outfit/job/roguetown/hand/advisor
 	category_tags = list(CTAG_HAND)
 

@@ -528,6 +528,7 @@
 	name = "Apostasy!"
 	desc = "Shame upon the member of clergy!"
 	icon_state = "debuff"
+	color ="#7a0606"
 
 // Disgraced Knight debuff for town buff cancellation: -1 END, -1 SPE, -1 PER
 /datum/status_effect/debuff/disgracedknight_town
