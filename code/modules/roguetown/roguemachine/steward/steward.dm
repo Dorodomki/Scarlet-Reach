@@ -49,6 +49,7 @@
 	daily_payments["Court Magician"] = 40 //University
 	daily_payments["Archivist"] = 20
 	daily_payments["Magos Thrall"] = 10
+	daily_payments["Gatemaster"] = 35 //gatemaster sucks to play lol
 
 /obj/structure/roguemachine/steward/attackby(obj/item/P, mob/user, params)
 	if(istype(P, /obj/item/roguekey))
