@@ -1163,7 +1163,7 @@
 	icon_state = "heartfelt_hand"
 	item_state = "heartfelt_hand"
 
-	/obj/item/clothing/suit/roguetown/armor/heartfelt/knight
+/obj/item/clothing/suit/roguetown/armor/heartfelt/knight
 	icon_state = "bkarmor"
 	item_state = "plate"
 	color = "#550000"

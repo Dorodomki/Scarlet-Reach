@@ -5,12 +5,26 @@
 	Now, alone and committed to safeguarding what remains of your court, you ride to the Peak, resolved to ensure their safe arrival."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_NO_GOLEM
-	outfit = /datum/outfit/job/roguetown/heartfelt/knight
 	total_positions = 1
 	spawn_positions = 0
 	job_traits = list(TRAIT_NOBLE, TRAIT_HEAVYARMOR, TRAIT_HEARTFELT)
 	advclass_cat_rolls = list(CTAG_HFT_KNIGHT)
 	social_rank = SOCIAL_RANK_NOBLE
+	job_subclasses = list(
+		/datum/advclass/heartfelt/knight
+		)
+
+/datum/advclass/heartfelt/knight
+	name = "Knight of Heartfelt"
+	tutorial = "You are a Knight of Heartfelt, once part of a brotherhood in service to your Lord. \
+	Now, alone and committed to safeguarding what remains of your court, you ride to the Peak, resolved to ensure their safe arrival."
+	category_tags = list(CTAG_HFT_KNIGHT)
+	maximum_possible_slots = 1
+	outfit = /datum/outfit/job/roguetown/heartfelt/knight
+	pickprob = 100
+	class_select_category = CLASS_CAT_HFT_COURT
+	subclass_social_rank = SOCIAL_RANK_NOBLE
+	traits_applied = list(
 
 /datum/outfit/job/roguetown/heartfelt/knight/pre_equip(mob/living/carbon/human/H)
 	..()

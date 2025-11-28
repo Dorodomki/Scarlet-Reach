@@ -11,6 +11,21 @@
 	job_traits = list(TRAIT_NOBLE, TRAIT_HEAVYARMOR, TRAIT_HEARTFELT)
 	advclass_cat_rolls = list(CTAG_HFT_LORD)
 	social_rank = SOCIAL_RANK_NOBLE
+	job_subclasses = list(
+		/datum/advclass/heartfelt/lord
+		)
+
+/datum/advclass/heartfelt/lord
+	name = "Lord of Heartfelt"
+	tutorial = "You are the Lord of Heartfelt, ruler of a once-prosperous barony now in ruin. \
+	Guided by your Magos, you journey to the Peak, seeking aid to restore your domain to its former glory, or perhaps claim a new throne."
+	category_tags = list(CTAG_HFT_KNIGHT)
+	maximum_possible_slots = 1
+	outfit = /datum/outfit/job/roguetown/heartfelt/knight
+	pickprob = 100
+	class_select_category = CLASS_CAT_HFT_COURT
+	subclass_social_rank = SOCIAL_RANK_NOBLE
+	traits_applied = list(TRAIT_NOBLE, TRAIT_HEAVYARMOR, TRAIT_HEARTFELT)
 
 /datum/outfit/job/roguetown/heartfelt/lord/pre_equip(mob/living/carbon/human/H)
 	..()

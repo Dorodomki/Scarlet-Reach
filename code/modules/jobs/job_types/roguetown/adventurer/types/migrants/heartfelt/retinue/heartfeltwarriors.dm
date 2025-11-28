@@ -107,9 +107,8 @@
 	Guided by the Magos, you journey to the Peak, seeking aid to restore your domain to its former glory, or perhaps claim a new throne."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/job/roguetown/heartfelt/retinue/housearb
-
-	category_tags = list(CTAG_MENATARMS)
-
+	category_tags = list(CTAG_HFT_RETINUE)
+	class_select_category = CLASS_CAT_HFT_GUARD
 	traits_applied = list(TRAIT_MEDIUMARMOR) // Medium Armor Forced - Heavier 'Defensive' Class
 	subclass_stats = list(
 		STATKEY_SPD = 2,

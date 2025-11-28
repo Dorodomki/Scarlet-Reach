@@ -102,7 +102,6 @@
 	Pressed once more into service by tragedy, you climb towards the Reach."
 	outfit = /datum/outfit/job/roguetown/heartfelt/hand/steward
 	category_tags = list(CTAG_HFT_HAND)
-
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_SEEPRICES)
 	subclass_stats = list(
 		STATKEY_STR = 1,
@@ -150,8 +149,7 @@
 	tutorial = "You are the Advisor of Heartfelt, trusted for your measured counsel and keen insight into matters of state. \
 	Bound once more to serve in the wake of ruin, you climb towards the Reach."
 	outfit = /datum/outfit/job/roguetown/heartfelt/hand/advisor
-	category_tags = list(CTAG_HAND)
-
+	category_tags = list(CTAG_HFT_HAND)
 	traits_applied = list(TRAIT_MAGEARMOR, TRAIT_ARCYNE_T2, TRAIT_INTELLECTUAL, TRAIT_SEEPRICES_SHITTY)
 	subclass_stats = list(
 		STATKEY_INT = 4,
