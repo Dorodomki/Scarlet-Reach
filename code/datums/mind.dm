@@ -183,6 +183,8 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 					if(S.person)
 						spouse_list += S.person.real_name
 				if(spouse_list.len)
+					if(!(H.real_name in M.known_people))
+						M.known_people[H.real_name] = list()
 					known_people[H.real_name]["FSPOUSE"] = jointext(spouse_list, ", ")
 		if (ishuman(current))
 			var/mob/living/carbon/human/C = current
