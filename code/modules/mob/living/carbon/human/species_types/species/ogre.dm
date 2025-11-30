@@ -6,11 +6,11 @@
 	id = "ogre"
 	origin_default = /datum/virtue/origin/racial/gronn
 	origin = "Gronn"
-	is_subrace = TRUE
+	is_subrace = TRUE(STAT_STRENGTH = 2, STAT_CONSTITUTION = 2, STAT_ENDURANCE = 1, STAT_INTELLIGENCE = -3, STAT_SPEED = -1)
 	base_name = "Ogroid"
 	desc = "<b>Ogres</b><br>\
-	bruh idfk<br>\
-	<span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b> +1 STR | +1 CON | -1 INT | -1 SPD</b></span> </br>\
+	Originating from Gronn, Ogres are gigantic - hulking beasts of vaguely humanlike stature. They're often mistaken for worshipping Graggar.<br>\
+	<span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b> +2 STR | +2 CON | | +2 END | -3 INT | -1 SPD</b></span> </br>\
 	<span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b> LANGUAGE: Orcish - ,o</b></span> </br>"
 
 	skin_tone_wording = "Region"

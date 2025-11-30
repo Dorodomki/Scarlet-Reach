@@ -13,7 +13,8 @@
 		STATKEY_STR = 4, 
 		STATKEY_CON = 3,
 		STATKEY_END = 3,
-		STATKEY_INT = -2,
+		STATKEY_SPD = -1,
+		STATKEY_INT = -1,
 	) //4 (class) + 2 (race) strength is 16 base strength - 15 is min strength for their weapons and i think itd be cool for people to play around with statpacks
 
 	subclass_skills = list(
