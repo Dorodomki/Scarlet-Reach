@@ -13,6 +13,7 @@
 	var/alert_type = /atom/movable/screen/alert/status_effect //the alert thrown by the status effect, contains name and description
 	var/atom/movable/screen/alert/status_effect/linked_alert = null //the alert itself, if it exists
 	var/list/effectedstats = list()
+	var/needs_processing = TRUE // if TRUE, we will be entered into SSfastprocess for ticking. if the effect is cleared/managed by another source, this should be FALSE.
 
 /datum/status_effect/New(list/arguments)
 	on_creation(arglist(arguments))
@@ -33,11 +34,13 @@
 		var/atom/movable/screen/alert/status_effect/A = owner.throw_alert(id, alert_type)
 		A?.attached_effect = src //so the alert can reference us, if it needs to
 		linked_alert = A //so we can reference the alert, if we need to
-	START_PROCESSING(SSfastprocess, src)
+	if(needs_processing)
+		START_PROCESSING(SSfastprocess, src)
 	return TRUE
 
 /datum/status_effect/Destroy()
-	STOP_PROCESSING(SSfastprocess, src)
+	if (needs_processing)
+		STOP_PROCESSING(SSfastprocess, src)
 	if(owner)
 		linked_alert = null
 		owner.clear_alert(id)
