@@ -846,6 +846,7 @@
 	icon_state = "kazen_helmet"
 	max_integrity = 250
 	allowed_race = OGRE_RACE_TYPES
+	slot_flags = ITEM_SLOT_NECK
 	body_parts_covered = HEAD | NOSE | EARS | HAIR //they can bite and are vulnerable to mouthsmashing
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/iron
