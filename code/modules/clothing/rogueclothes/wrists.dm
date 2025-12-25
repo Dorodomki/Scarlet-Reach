@@ -138,6 +138,15 @@
 	smeltresult = /obj/item/ingot/copper
 	armor = ARMOR_MASK_METAL_BAD
 
+/obj/item/clothing/wrists/roguetown/bracers/graggar
+	name = "vicious bracers"
+	desc = "Oh, to plunge hands into cold water; to play a melody upon an ivory-keyed piano; to watch steam rise from boiling, twisting entrails.."
+	color = "#ddc0a7"
+
+/obj/item/clothing/wrists/roguetown/bracers/graggar/Initialize()
+	. = ..()
+	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
+
 /obj/item/clothing/wrists/roguetown/wrappings
 	name = "solar wrappings"
 	slot_flags = ITEM_SLOT_WRISTS

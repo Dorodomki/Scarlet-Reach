@@ -1,3 +1,38 @@
+
+//Bloodrage T0 -- Uncapped STR buff.
+/obj/effect/proc_holder/spell/self/graggar_bloodrage
+	name = "Bloodrage"
+	desc = "Grants you unbound strength for a short while."
+	overlay_state = "bloodrage"
+	recharge_time = 5 MINUTES
+	invocation = "GRAGGAR!! GRAGGAR!! GRAGGAR!!"
+	invocation_type = "shout"
+	sound = 'sound/magic/bloodrage.ogg'
+	releasedrain = 30
+	miracle = TRUE
+	devotion_cost = 80
+	antimagic_allowed = FALSE
+	var/static/list/purged_effects = list(
+	/datum/status_effect/incapacitating/immobilized,
+	/datum/status_effect/incapacitating/paralyzed,
+	/datum/status_effect/incapacitating/stun,
+	/datum/status_effect/incapacitating/knockdown,)
+
+/obj/effect/proc_holder/spell/self/graggar_bloodrage/cast(list/targets, mob/user)
+	. = ..()
+	if(!ishuman(user))
+		revert_cast()
+		return FALSE
+	var/mob/living/carbon/human/H = user
+	if(H.resting)
+		H.set_resting(FALSE, FALSE)
+	H.emote("warcry")
+	for(var/effect in purged_effects)
+		H.remove_status_effect(effect)
+	H.apply_status_effect(/datum/status_effect/buff/bloodrage)
+	H.visible_message(span_danger("[H] rises upward, boiling with immense rage!"))
+	return TRUE
+
 //Call to Slaughter - AoE buff for all people surrounding you.
 /obj/effect/proc_holder/spell/self/call_to_slaughter
 	name = "Call to Slaughter"
@@ -32,6 +67,7 @@
 	desc = "Toss forth an unholy snare of blood and guts a short distance, summoned from your leftover trophies sacrificed to Graggar. Like a net, may it snare your target!"
 	clothes_req = FALSE
 	overlay_state = "unholy_grasp"
+	req_inhand = /obj/item/alch/viscera
 	associated_skill = /datum/skill/magic/holy
 	projectile_type = /obj/projectile/magic/unholy_grasp
 	chargedloop = /datum/looping_sound/invokeholy
@@ -41,24 +77,22 @@
 	recharge_time = 30 SECONDS
 
 /obj/projectile/magic/unholy_grasp
-	name = "visceral organ net"
+	name = "viceral organ net"
 	icon_state = "tentacle_end"
 	nodamage = TRUE
-	range = 4
+	range = 5
 
 /obj/projectile/magic/unholy_grasp/on_hit(atom/hit_atom, datum/thrownthing/throwingdatum)
-	. = ..()
-	if(. != BULLET_ACT_HIT)
-		return
-	if(!iscarbon(hit_atom))	//if it gets caught or the target can't be cuffed.
-		return
-	ensnare(hit_atom)
+	if(!iscarbon(hit_atom))	//Check if target can be ensnared
+		return ..()	//Not a valid target, just do normal projectile behavior
+	ensnare(hit_atom)	//Ensnare the target first
+	. = ..()	//Then handle projectile cleanup
 
 /obj/projectile/magic/unholy_grasp/proc/ensnare(mob/living/carbon/carbon)
 	if(carbon.legcuffed || carbon.get_num_legs(FALSE) < 2)
 		return
 
-	visible_message(span_danger("\The [src] ensnares [carbon] in viscera!"))
+	visible_message(span_danger("\The [src] ensnares [carbon] in vicera!"))
 	carbon.legcuffed = src
 	forceMove(carbon)
 	carbon.update_inv_legcuffed()
@@ -122,37 +156,3 @@
 		return
 
 	physiology.pain_mod /= 1.5
-
-//Bloodrage T0 -- Uncapped STR buff.
-/obj/effect/proc_holder/spell/self/graggar_bloodrage
-	name = "Bloodrage"
-	desc = "Grants you unbound strength for a short while."
-	overlay_state = "bloodrage"
-	recharge_time = 5 MINUTES
-	invocation = "GRAGGAR!! GRAGGAR!! GRAGGAR!!"
-	invocation_type = "shout"
-	sound = 'sound/magic/bloodrage.ogg'
-	releasedrain = 30
-	miracle = TRUE
-	devotion_cost = 80
-	antimagic_allowed = FALSE
-	var/static/list/purged_effects = list(
-	/datum/status_effect/incapacitating/immobilized,
-	/datum/status_effect/incapacitating/paralyzed,
-	/datum/status_effect/incapacitating/stun,
-	/datum/status_effect/incapacitating/knockdown,)
-
-/obj/effect/proc_holder/spell/self/graggar_bloodrage/cast(list/targets, mob/user)
-	. = ..()
-	if(!ishuman(user))
-		revert_cast()
-		return FALSE
-	var/mob/living/carbon/human/H = user
-	if(H.resting)
-		H.set_resting(FALSE, FALSE)
-	H.emote("warcry")
-	for(var/effect in purged_effects)
-		H.remove_status_effect(effect)
-	H.apply_status_effect(/datum/status_effect/buff/bloodrage)
-	H.visible_message(span_danger("[H] rises upward, boiling with immense rage!"))
-	return TRUE

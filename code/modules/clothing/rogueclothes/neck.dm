@@ -317,6 +317,15 @@
 	max_integrity = 300
 	smeltresult = /obj/item/ingot/aaslag
 
+/obj/item/clothing/neck/roguetown/gorget/steel/graggar
+	name = "vicious gorget"
+	desc = "Curled plate, cradling the neck. Once, they were chains - now, they've allowed you to break free."
+	color = "#ddc0a7"
+
+/obj/item/clothing/neck/roguetown/gorget/graggar/Initialize()
+	. = ..()
+	AddComponent(/datum/component/cursed_item, TRAIT_HORDE, "ARMOR", "RENDERED ASUNDER")
+
 /obj/item/clothing/neck/roguetown/gorget/cursed_collar
 	name = "cursed collar"
 	desc = "A metal collar that seems to radiate an ominous aura."
