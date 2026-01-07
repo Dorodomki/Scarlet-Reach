@@ -306,7 +306,7 @@
 			I.gripped_intents = list(/datum/intent/axe/cut/battle/greataxe, /datum/intent/axe/chop/battle/greataxe, /datum/intent/axe/bash)
 		else if(istype(I, /obj/item/rogueweapon/mace/goden/martyr))
 			I.possible_item_intents = list(/datum/intent/mace/strike)
-			I.gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/effect/daze, /datum/intent/effect/hobble)
+			I.gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/effect/daze)
 		else if(istype(I, /obj/item/rogueweapon/spear/partizan/martyr))
 			I.possible_item_intents = list(/datum/intent/spear/thrust, /datum/intent/spear/bash)
 			I.gripped_intents = list(/datum/intent/spear/thrust, /datum/intent/rend/reach/partizan, /datum/intent/partizan/peel, /datum/intent/spear/bash)
@@ -381,7 +381,7 @@
 			I.gripped_intents = list(/datum/intent/axe/cut/battle/greataxe/martyr, /datum/intent/axe/chop/battle/greataxe/martyr, /datum/intent/axe/bash/martyr)
 		else if(istype(I, /obj/item/rogueweapon/mace/goden/martyr))
 			I.possible_item_intents = list(/datum/intent/mace/strike/martyr)
-			I.gripped_intents = list(/datum/intent/mace/strike/martyr, /datum/intent/mace/smash/martyr, /datum/intent/effect/daze/martyr, /datum/intent/effect/hobble/martyr)
+			I.gripped_intents = list(/datum/intent/mace/strike/martyr, /datum/intent/mace/smash/martyr, /datum/intent/effect/daze/martyr)
 		else if(istype(I, /obj/item/rogueweapon/spear/partizan/martyr))
 			I.possible_item_intents = list(/datum/intent/spear/thrust/martyr, /datum/intent/spear/bash/martyr)
 			I.gripped_intents = list(/datum/intent/spear/thrust/martyr, /datum/intent/rend/reach/partizan/martyr, /datum/intent/partizan/peel/martyr, /datum/intent/spear/bash/martyr)
@@ -777,7 +777,7 @@
 
 /obj/item/rogueweapon/mace/goden/martyr
 	possible_item_intents = list(/datum/intent/mace/strike)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/effect/daze, /datum/intent/effect/hobble)
+	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/effect/daze)
 	icon_state = "martyrmace"
 	icon = 'icons/roguetown/weapons/64.dmi'
 	item_state = "martyrmace"
@@ -813,11 +813,6 @@
 		blade_class = BCLASS_SMASH
 
 /datum/intent/effect/daze/martyr
-		item_d_type = "fire"
-		blade_class = BCLASS_EFFECT
-		swingdelay = 2
-
-/datum/intent/effect/hobble/martyr
 		item_d_type = "fire"
 		blade_class = BCLASS_EFFECT
 		swingdelay = 2
